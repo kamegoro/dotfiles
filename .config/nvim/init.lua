@@ -1,5 +1,7 @@
+-- ターミナルのカラースキームを有効にする
 vim.opt.termguicolors = true
 
+-- Lazy.nvimのインストールと初期化
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
@@ -7,42 +9,46 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
+    "--branch=stable",  -- 最新の安定版をインストール
     lazypath,
   })
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- プラグインのセットアップ
 require("lazy").setup({
-  'folke/tokyonight.nvim',
-  {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'},
-  {'nvim-tree/nvim-tree.lua',
-    requires = {
-      'nvim-tree/nvim-web-devicons',
-    },
-  },
-  'nvim-lua/plenary.nvim',
-  {'nvim-telescope/telescope.nvim', tag = '0.1.0' },
-  'kyazdani42/nvim-web-devicons',
-  {
-    'nvim-lualine/lualine.nvim',
-    requires = 'kyazdani42/nvim-web-devicons'
-  },
-  {'neoclide/coc.nvim', branch='release'},
-  'yamatsum/nvim-cursorline',
-  'pechorin/any-jump.vim',
-  {'numToStr/Comment.nvim', config = function() require('Comment').setup() end},
-  'norcalli/nvim-colorizer.lua',
-  'dinhhuy258/git.nvim',
-  'lewis6991/gitsigns.nvim',
-  'windwp/nvim-ts-autotag',
-  'pocco81/auto-save.nvim',
-  'akinsho/bufferline.nvim',
-  'windwp/nvim-autopairs',
-  'echasnovski/mini.indentscope',
-  'akinsho/toggleterm.nvim',
+  -- 外観とテーマ関連
+  'folke/tokyonight.nvim',  -- カラースキーム
+  'kyazdani42/nvim-web-devicons',  -- アイコンのサポート
+
+  -- 編集補助ツール
+  {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'},  -- Treesitterによるシンタックスハイライト
+  'nvim-lua/plenary.nvim',  -- ヘルパーツールライブラリ
+  {'nvim-telescope/telescope.nvim', tag = '0.1.0'},  -- 高機能検索ツール
+  'nvim-lualine/lualine.nvim',  -- ステータスライン
+  'yamatsum/nvim-cursorline',  -- カーソル行をハイライト
+  'windwp/nvim-ts-autotag',  -- HTMLタグの自動補完
+
+  -- コード補完
+  {'neoclide/coc.nvim', branch = 'release'},  -- コード補完とサジェスト
+
+  -- ファイル・バッファ管理
+  'nvim-tree/nvim-tree.lua',  -- ファイルツリー
+  'akinsho/bufferline.nvim',  -- 複数バッファの管理
+  'akinsho/toggleterm.nvim',  -- ターミナル管理
+
+  -- その他
+  'lewis6991/gitsigns.nvim',  -- Git情報の表示
+  'dinhhuy258/git.nvim',  -- Gitインターフェース
+  'norcalli/nvim-colorizer.lua',  -- 色の強調表示
+  'pocco81/auto-save.nvim',  -- 自動保存
+  'windwp/nvim-autopairs',  -- 自動ペア補完
+  'numToStr/Comment.nvim',  -- コメントアウトを簡単に
+  'pechorin/any-jump.vim',  -- 高速ジャンプ
+  'echasnovski/mini.indentscope',  -- インデントスコープ
 })
 
+-- プラグイン設定の読み込み
 require("plugins.auto_save")
 require("plugins.bufferline")
 require("plugins.colorizer")

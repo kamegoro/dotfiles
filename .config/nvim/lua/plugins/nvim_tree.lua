@@ -1,9 +1,9 @@
 require'nvim-tree'.setup {
   filters = {
-    dotfiles = true,
+    dotfiles = false,
   },
   view = {
-    width = 30,  -- サイドバーの幅
+    width = 30,
     side = 'left',
   },
   renderer = {
@@ -15,7 +15,7 @@ require'nvim-tree'.setup {
         git = true,
       },
       glyphs = {
-        default = '',  -- デフォルトアイコン
+        default = '',
         symlink = '',
         git = {
           unstaged = '',
