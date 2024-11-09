@@ -20,6 +20,13 @@ require("lazy").setup({
   -- 外観とテーマ関連
   'folke/tokyonight.nvim',  -- カラースキーム
   'kyazdani42/nvim-web-devicons',  -- アイコンのサポート
+  {
+	  'chikko80/error-lens.nvim',
+	  event = 'BufRead',
+	  dependencies = {
+		  'nvim-telescope/telescope.nvim',
+	  },
+  },
 
   -- 編集補助ツール
   {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'},  -- Treesitterによるシンタックスハイライト
@@ -60,3 +67,4 @@ require("plugins.nvim_tree")
 require("plugins.nvim_web_devicons")
 require("plugins.nvim_autopairs")
 require("plugins.toggleterm")
+
