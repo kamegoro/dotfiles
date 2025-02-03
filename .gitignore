@@ -1,0 +1,16 @@
+# vim-plugによるプラグインインストール先
+.vim/plugged/
+
+# Vim のバックアップファイル
+*.swp
+*.swo
+
+# Vim のキャッシュファイル
+.viminfo
+.netrwhist
+
+# Undo ファイル
+.vim/undo/
+
+# Backup ファイル
+.vim/backup/
