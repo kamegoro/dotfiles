@@ -39,6 +39,10 @@ require("lazy").setup({
   -- コード補完
   {'neoclide/coc.nvim', branch = 'release'},  -- コード補完とサジェスト
 
+
+  -- Language Server
+  'neovim/nvim-lspconfig',
+
   -- ファイル・バッファ管理
   'nvim-tree/nvim-tree.lua',  -- ファイルツリー
   'akinsho/bufferline.nvim',  -- 複数バッファの管理
@@ -67,4 +71,5 @@ require("plugins.nvim_tree")
 require("plugins.nvim_web_devicons")
 require("plugins.nvim_autopairs")
 require("plugins.toggleterm")
+require("plugins.lspconfig")
 
