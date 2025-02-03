@@ -14,3 +14,6 @@
 
 # Backup ファイル
 .vim/backup/
+
+# プラグイン管理ディレクトリ
+.vim/pack/
