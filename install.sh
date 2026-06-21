@@ -48,27 +48,13 @@ for item in "$DOTFILES_DIR"/.*; do
   fi
 done
 
-# VS Code settings
-echo ""
-echo "==> Linking VS Code settings"
-VSCODE_DIR="$HOME/Library/Application Support/Code/User"
-if [[ -d "$VSCODE_DIR" ]]; then
-  link_file "$DOTFILES_DIR/vscode/settings.json" "$VSCODE_DIR/settings.json"
-else
-  echo "  skip: VS Code not found"
-fi
-
 echo ""
 echo "==> Done!"
 echo ""
 echo "Post-install steps:"
-echo "  1. Install vscode-neovim extension:"
-echo "       code --install-extension asvetliakov.vscode-neovim"
-echo "  2. Uninstall old vscodevim:"
-echo "       code --uninstall-extension vscodevim.vim"
-echo "  3. Install vim-plug: curl -fLo ~/.vim/autoload/plug.vim --create-dirs \\"
-echo "       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-echo "  4. Install vim plugins: vim +PlugInstall +qall"
-echo "  5. Install zsh plugins if missing:"
+echo "  1. Open nvim to auto-install plugins: nvim"
+echo "  2. Set ANTHROPIC_API_KEY for avante.nvim:"
+echo "       export ANTHROPIC_API_KEY=sk-ant-..."
+echo "  3. Install zsh plugins if missing:"
 echo "       git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions"
 echo "       git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/zsh-syntax-highlighting"
