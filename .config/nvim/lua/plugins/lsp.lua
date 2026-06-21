@@ -5,91 +5,86 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
+    dependencies = { "williamboman/mason.nvim" },
     opts = {
       ensure_installed = {
-        -- TypeScript / JavaScript
         "ts_ls",
         "eslint",
-        -- Go
         "gopls",
-        -- Python
         "pyright",
         "ruff",
-        -- Lua
         "lua_ls",
-        -- YAML / JSON
         "yamlls",
         "jsonls",
-        -- Docker
         "dockerls",
         "docker_compose_language_service",
-        -- SQL
         "sqlls",
-        -- Helm
         "helm_ls",
-        -- Terraform
         "terraformls",
-        -- Markdown
         "marksman",
       },
       automatic_installation = true,
     },
-    config = function(_, opts)
-      require("mason-lspconfig").setup(opts)
-      require("mason-lspconfig").setup_handlers({
-        function(server_name)
-          require("lspconfig")[server_name].setup({})
-        end,
-        ["lua_ls"] = function()
-          require("lspconfig").lua_ls.setup({
-            settings = {
-              Lua = { diagnostics = { globals = { "vim" } } },
-            },
-          })
-        end,
-        ["gopls"] = function()
-          require("lspconfig").gopls.setup({
-            settings = {
-              gopls = {
-                analyses = {
-                  unusedparams = true,
-                  shadow = true,
-                },
-                staticcheck = true,
-                gofumpt = true,
-              },
-            },
-          })
-        end,
-        ["yamlls"] = function()
-          require("lspconfig").yamlls.setup({
-            settings = {
-              yaml = {
-                schemas = {
-                  kubernetes = "/*.yaml",
-                  ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-                  ["https://json.schemastore.org/chart.json"] = "/Chart.yaml",
-                },
-              },
-            },
-          })
-        end,
-        ["jsonls"] = function()
-          require("lspconfig").jsonls.setup({
-            settings = {
-              json = {
-                schemas = require("schemastore").json.schemas(),
-                validate = { enable = true },
-              },
-            },
-          })
-        end,
-      })
-    end,
   },
   {
     "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "b0o/schemastore.nvim", "hrsh7th/cmp-nvim-lsp" },
+    config = function()
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+      local servers = {
+        ts_ls = {},
+        eslint = {},
+        pyright = {},
+        ruff = {},
+        dockerls = {},
+        docker_compose_language_service = {},
+        sqlls = {},
+        helm_ls = {},
+        terraformls = {},
+        marksman = {},
+        gopls = {
+          settings = {
+            gopls = {
+              analyses = { unusedparams = true, shadow = true },
+              staticcheck = true,
+              gofumpt = true,
+            },
+          },
+        },
+        lua_ls = {
+          settings = {
+            Lua = { diagnostics = { globals = { "vim" } } },
+          },
+        },
+        yamlls = {
+          settings = {
+            yaml = {
+              schemas = {
+                kubernetes = "/*.yaml",
+                ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+                ["https://json.schemastore.org/chart.json"] = "/Chart.yaml",
+              },
+            },
+          },
+        },
+        jsonls = {
+          settings = {
+            json = {
+              schemas = require("schemastore").json.schemas(),
+              validate = { enable = true },
+            },
+          },
+        },
+      }
+
+      for name, config in pairs(servers) do
+        config.capabilities = capabilities
+        vim.lsp.config(name, config)
+        vim.lsp.enable(name)
+      end
+    end,
     keys = {
       { "gd", vim.lsp.buf.definition, desc = "Go to definition" },
       { "gr", vim.lsp.buf.references, desc = "References" },
@@ -102,7 +97,5 @@ return {
       { "<leader>d", vim.diagnostic.open_float, desc = "Diagnostic float" },
     },
   },
-  {
-    "b0o/schemastore.nvim",
-  },
+  { "b0o/schemastore.nvim", lazy = true },
 }
