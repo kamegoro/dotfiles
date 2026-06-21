@@ -1,0 +1,6 @@
+alias k=kubectl
+alias kctx=kubectx
+alias kns=kubens
+
+alias v=nvim
+alias air='$(go env GOPATH)/bin/air'

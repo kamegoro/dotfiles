@@ -1,0 +1,22 @@
+[user]
+	name = kamegoro
+	email = tentyo0620@icloud.com
+[core]
+	editor = vim
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	side-by-side = true
+[merge]
+	conflictstyle = zdiff3
+[pull]
+	rebase = true
+[init]
+	defaultBranch = main
+[alias]
+	s = status
+	d = diff
+	l = log --oneline -20
+	co = checkout
+	br = branch
