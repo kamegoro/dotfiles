@@ -15,7 +15,17 @@ return {
       provider = "claude",
       claude = {
         model = "claude-sonnet-4-6",
+        max_tokens = 8192,
       },
+      behaviour = {
+        auto_suggestions = false,
+        auto_set_keymaps = true,
+      },
+      hints = { enabled = true },
+    },
+    keys = {
+      { "<leader>aa", "<cmd>AvanteAsk<CR>", desc = "Avante: Ask" },
+      { "<leader>ae", "<cmd>AvanteEdit<CR>", mode = "v", desc = "Avante: Edit selection" },
     },
   },
 }

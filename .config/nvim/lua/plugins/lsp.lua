@@ -8,10 +8,30 @@ return {
     dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
     opts = {
       ensure_installed = {
-        "lua_ls",
+        -- TypeScript / JavaScript
         "ts_ls",
+        "eslint",
+        -- Go
         "gopls",
+        -- Python
         "pyright",
+        "ruff",
+        -- Lua
+        "lua_ls",
+        -- YAML / JSON
+        "yamlls",
+        "jsonls",
+        -- Docker
+        "dockerls",
+        "docker_compose_language_service",
+        -- SQL
+        "sqlls",
+        -- Helm
+        "helm_ls",
+        -- Terraform
+        "terraformls",
+        -- Markdown
+        "marksman",
       },
       automatic_installation = true,
     },
@@ -24,8 +44,43 @@ return {
         ["lua_ls"] = function()
           require("lspconfig").lua_ls.setup({
             settings = {
-              Lua = {
-                diagnostics = { globals = { "vim" } },
+              Lua = { diagnostics = { globals = { "vim" } } },
+            },
+          })
+        end,
+        ["gopls"] = function()
+          require("lspconfig").gopls.setup({
+            settings = {
+              gopls = {
+                analyses = {
+                  unusedparams = true,
+                  shadow = true,
+                },
+                staticcheck = true,
+                gofumpt = true,
+              },
+            },
+          })
+        end,
+        ["yamlls"] = function()
+          require("lspconfig").yamlls.setup({
+            settings = {
+              yaml = {
+                schemas = {
+                  kubernetes = "/*.yaml",
+                  ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+                  ["https://json.schemastore.org/chart.json"] = "/Chart.yaml",
+                },
+              },
+            },
+          })
+        end,
+        ["jsonls"] = function()
+          require("lspconfig").jsonls.setup({
+            settings = {
+              json = {
+                schemas = require("schemastore").json.schemas(),
+                validate = { enable = true },
               },
             },
           })
@@ -44,6 +99,10 @@ return {
       { "<leader>ca", vim.lsp.buf.code_action, desc = "Code action" },
       { "]d", vim.diagnostic.goto_next, desc = "Next diagnostic" },
       { "[d", vim.diagnostic.goto_prev, desc = "Prev diagnostic" },
+      { "<leader>d", vim.diagnostic.open_float, desc = "Diagnostic float" },
     },
+  },
+  {
+    "b0o/schemastore.nvim",
   },
 }

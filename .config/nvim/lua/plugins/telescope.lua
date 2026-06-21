@@ -7,7 +7,16 @@ return {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
     config = function()
-      require("telescope").load_extension("fzf")
+      local telescope = require("telescope")
+      telescope.setup({
+        defaults = {
+          file_ignore_patterns = { "node_modules", ".git/", "dist/", "build/" },
+          layout_strategy = "horizontal",
+          sorting_strategy = "ascending",
+          layout_config = { prompt_position = "top" },
+        },
+      })
+      telescope.load_extension("fzf")
     end,
     keys = {
       { "<leader>f", "<cmd>Telescope find_files<CR>", desc = "Find files" },
@@ -16,6 +25,9 @@ return {
       { "<leader>b", "<cmd>Telescope buffers<CR>", desc = "Buffers" },
       { "<leader>h", "<cmd>Telescope help_tags<CR>", desc = "Help" },
       { "<leader>r", "<cmd>Telescope oldfiles<CR>", desc = "Recent files" },
+      { "<leader>sd", "<cmd>Telescope diagnostics<CR>", desc = "Diagnostics" },
+      { "<leader>sk", "<cmd>Telescope keymaps<CR>", desc = "Keymaps" },
+      { "<leader>sg", "<cmd>Telescope git_status<CR>", desc = "Git status" },
     },
   },
 }
