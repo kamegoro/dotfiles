@@ -3,7 +3,7 @@ return {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
-      options = { theme = "catppuccin" },
+      options = { theme = "catppuccin-nvim" },
       sections = {
         lualine_a = { "mode" },
         lualine_b = {
@@ -11,8 +11,7 @@ return {
           {
             "diff",
             source = function()
-              local ok, gs = pcall(require, "gitsigns")
-              if not ok then return end
+              if not package.loaded["gitsigns"] then return end
               local d = vim.b.gitsigns_status_dict
               if not d then return end
               return { added = d.added, modified = d.changed, removed = d.removed }

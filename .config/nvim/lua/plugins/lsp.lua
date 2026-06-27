@@ -23,6 +23,11 @@ return {
         "marksman",
       },
       automatic_installation = true,
+      -- LSP setup は nvim-lspconfig 側で vim.lsp.config/enable を使って手動管理するため
+      -- mason-lspconfig のデフォルトハンドラー（全インストール済みサーバーを自動 enable）を無効化
+      handlers = {
+        function(_) end,
+      },
     },
   },
   {
@@ -82,6 +87,8 @@ return {
         vim.lsp.config(name, config)
         vim.lsp.enable(name)
       end
+      -- typescript-tools.nvim を使うため ts_ls を明示的に無効化
+      vim.lsp.enable("ts_ls", false)
     end,
     keys = {
       { "gd", vim.lsp.buf.definition, desc = "Go to definition" },
