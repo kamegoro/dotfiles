@@ -13,7 +13,7 @@ return {
     },
     opts = {
       formatters_by_ft = {
-        go = { "gofumpt", "goimports" },
+        go = { "goimports", "gofumpt" },
         javascript = { "prettier" },
         typescript = { "prettier" },
         typescriptreact = { "prettier" },
@@ -41,7 +41,6 @@ return {
       local lint = require("lint")
       lint.linters_by_ft = {
         go = { "golangcilint" },
-        python = { "ruff" },
         dockerfile = { "hadolint" },
       }
       vim.api.nvim_create_autocmd({ "BufWritePost" }, {

@@ -1,8 +1,9 @@
 return {
   { "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
-  { "numToStr/Comment.nvim", opts = {} },
+  { "numToStr/Comment.nvim", event = "BufReadPost", opts = {} },
   {
     "akinsho/toggleterm.nvim",
+    event = "VeryLazy",
     opts = {
       open_mapping = [[<C-\>]],
       direction = "float",
@@ -48,13 +49,14 @@ return {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview" },
     ft = { "markdown" },
-    build = "cd app && npx --yes yarn install",
+    build = "cd app && npm install",
     keys = {
       { "<leader>mp", "<cmd>MarkdownPreviewToggle<CR>", desc = "Markdown preview" },
     },
   },
   {
     "RaafatTurki/hex.nvim",
+    cmd = { "HexToggle", "HexDump", "HexAssemble", "Hexplore" },
     opts = {},
   },
   {

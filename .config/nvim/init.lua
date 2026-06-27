@@ -24,6 +24,7 @@ vim.opt.scrolloff = 8
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.mouse = "a"
+vim.opt.timeoutlen = 300
 
 -- Keymaps
 vim.keymap.set("i", "jj", "<Esc>")
