@@ -4,6 +4,27 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       options = { theme = "catppuccin" },
+      sections = {
+        lualine_a = { "mode" },
+        lualine_b = {
+          "branch",
+          {
+            "diff",
+            source = function()
+              local ok, gs = pcall(require, "gitsigns")
+              if not ok then return end
+              local d = vim.b.gitsigns_status_dict
+              if not d then return end
+              return { added = d.added, modified = d.changed, removed = d.removed }
+            end,
+          },
+          "diagnostics",
+        },
+        lualine_c = { { "filename", path = 1 } },
+        lualine_x = { "encoding", "fileformat", "filetype" },
+        lualine_y = { "progress" },
+        lualine_z = { "location" },
+      },
     },
   },
   {
@@ -26,7 +47,8 @@ return {
     main = "ibl",
     opts = {
       exclude = {
-        filetypes = { "dashboard", "help", "neo-tree", "Trouble", "lazy", "mason", "toggleterm", "markdown", "text" },
+        filetypes = { "dashboard", "help", "neo-tree", "Trouble", "lazy", "mason", "toggleterm", "markdown", "text", "" },
+        buftypes = { "nofile", "terminal", "prompt", "quickfix" },
       },
     },
   },
