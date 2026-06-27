@@ -21,8 +21,8 @@ return {
         center = {
           { action = "Telescope find_files", desc = " Find File", icon = "󰈞 ", key = "f" },
           { action = "Telescope oldfiles", desc = " Recent Files", icon = "󰊄 ", key = "r" },
-          { action = "Telescope live_grep", desc = " Find Word", icon = "󰊄 ", key = "g" },
-          { action = "ene | startinsert", desc = " New File", icon = " ", key = "n" },
+          { action = "Telescope live_grep", desc = " Find Word", icon = "󰊄 ", key = "l" },
+          { action = "enew! | startinsert", desc = " New File", icon = " ", key = "n" },
           { action = "Lazy", desc = " Plugins", icon = "󰒲 ", key = "p" },
           { action = "qa", desc = " Quit", icon = " ", key = "q" },
         },

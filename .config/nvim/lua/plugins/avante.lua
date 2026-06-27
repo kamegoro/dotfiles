@@ -9,13 +9,17 @@ return {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
       "nvim-tree/nvim-web-devicons",
-      "MeanderingProgrammer/render-markdown.nvim",
+      { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "Avante" } },
     },
     opts = {
       provider = "claude",
-      claude = {
-        model = "claude-sonnet-4-6",
-        max_tokens = 8192,
+      providers = {
+        claude = {
+          model = "claude-sonnet-4-6",
+          extra_request_body = {
+            max_tokens = 8192,
+          },
+        },
       },
       behaviour = {
         auto_suggestions = false,

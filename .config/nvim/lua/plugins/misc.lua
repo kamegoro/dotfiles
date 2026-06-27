@@ -57,4 +57,26 @@ return {
     "RaafatTurki/hex.nvim",
     opts = {},
   },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    event = "BufReadPost",
+    opts = {},
+    keys = {
+      { "]t", function() require("todo-comments").jump_next() end, desc = "Next TODO" },
+      { "[t", function() require("todo-comments").jump_prev() end, desc = "Prev TODO" },
+      { "<leader>ft", "<cmd>TodoTelescope<CR>", desc = "TODO list" },
+    },
+  },
+  {
+    "RRethy/vim-illuminate",
+    event = "BufReadPost",
+    opts = {
+      delay = 200,
+      large_file_cutoff = 2000,
+    },
+    config = function(_, opts)
+      require("illuminate").configure(opts)
+    end,
+  },
 }

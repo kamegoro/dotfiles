@@ -24,6 +24,30 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
-    opts = {},
+    opts = {
+      exclude = {
+        filetypes = { "dashboard", "help", "neo-tree", "Trouble", "lazy", "mason", "toggleterm", "markdown", "text" },
+      },
+    },
+  },
+  {
+    "j-hui/fidget.nvim",
+    opts = {
+      progress = {
+        suppress_on_insert = true,
+        display = { done_ttl = 2 },
+      },
+      notification = {
+        override_vim_notify = false,
+      },
+    },
+  },
+  {
+    "karb94/neoscroll.nvim",
+    opts = {
+      mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "zt", "zz", "zb" },
+      hide_cursor = true,
+      easing = "sine",
+    },
   },
 }

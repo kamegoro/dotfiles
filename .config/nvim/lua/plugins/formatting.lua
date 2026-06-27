@@ -6,7 +6,7 @@ return {
       {
         "<leader>cf",
         function()
-          require("conform").format({ async = true, lsp_fallback = true })
+          require("conform").format({ async = true, lsp_format = "fallback" })
         end,
         desc = "Format",
       },
@@ -30,7 +30,7 @@ return {
       },
       format_on_save = {
         timeout_ms = 3000,
-        lsp_fallback = true,
+        lsp_format = "fallback",
       },
     },
   },
@@ -44,7 +44,7 @@ return {
         python = { "ruff" },
         dockerfile = { "hadolint" },
       }
-      vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
+      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
         callback = function()
           lint.try_lint()
         end,

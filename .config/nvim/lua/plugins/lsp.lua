@@ -8,7 +8,6 @@ return {
     dependencies = { "williamboman/mason.nvim" },
     opts = {
       ensure_installed = {
-        "ts_ls",
         "eslint",
         "gopls",
         "pyright",
@@ -34,7 +33,6 @@ return {
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       local servers = {
-        ts_ls = {},
         eslint = {},
         pyright = {},
         ruff = {},
