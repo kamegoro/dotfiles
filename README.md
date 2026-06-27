@@ -1,11 +1,12 @@
 # dotfiles
 
-## Setup
+macOS 向けの個人 dotfiles。シンボリックリンク方式で管理。
+
+## Quick Start
 
 ```bash
 git clone https://github.com/kamegoro/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-chmod +x install.sh
 ./install.sh
 ```
 
@@ -13,25 +14,69 @@ chmod +x install.sh
 
 ```
 ~/dotfiles/
-├── .zshrc
-├── .zsh_aliases
-├── .vimrc
-├── .ideavimrc
-├── .gitconfig
-├── .p10k.zsh
 ├── .config/
-│   ├── git/ignore
-│   └── mise/config.toml
-├── install.sh
-└── .ignore         # files to skip during install
+│   ├── nvim/               # Neovim (lazy.nvim)
+│   │   ├── init.lua
+│   │   ├── lazy-lock.json
+│   │   └── lua/plugins/
+│   ├── git/
+│   │   └── ignore          # global gitignore
+│   └── mise/
+│       └── config.toml     # ランタイムバージョン管理
+├── .gitconfig              # git 設定
+├── .zshrc                  # zsh 設定
+├── .zsh_aliases            # エイリアス
+├── .p10k.zsh               # Powerlevel10k テーマ設定
+├── .vimrc                  # vim fallback 設定
+├── .ideavimrc              # IdeaVim 設定
+└── install.sh              # シンボリックリンク作成スクリプト
 ```
 
 ## Dependencies
 
-- [Powerlevel10k](https://github.com/romkatv/powerlevel10k): `brew install powerlevel10k`
-- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
-- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
-- [vim-plug](https://github.com/junegunn/vim-plug)
-- [delta](https://github.com/dandavella/delta): `brew install git-delta`
-- [mise](https://mise.jdx.dev/): `brew install mise`
-- [fzf](https://github.com/junegunn/fzf): managed via mise
+### 必須
+
+| ツール | インストール |
+|--------|------------|
+| [Neovim](https://neovim.io/) >= 0.12 | `brew install neovim` |
+| [JetBrains Mono Nerd Font](https://www.nerdfonts.com/) | `brew install font-jetbrains-mono-nerd-font` |
+| [mise](https://mise.jdx.dev/) | `brew install mise` |
+| [git-delta](https://github.com/dandavison/delta) | `brew install git-delta` |
+
+### zsh プラグイン
+
+```bash
+brew install powerlevel10k
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/zsh-syntax-highlighting
+```
+
+## Neovim
+
+プラグインマネージャー: [lazy.nvim](https://github.com/folke/lazy.nvim)
+
+| カテゴリ | プラグイン |
+|----------|-----------|
+| カラースキーム | catppuccin (mocha) |
+| UI | lualine, bufferline, noice, nvim-notify, dashboard-nvim, dropbar |
+| ファイラー | neo-tree |
+| ファジーファインダー | telescope + fzf-native |
+| LSP | nvim-lspconfig, mason, mason-lspconfig |
+| 補完 | nvim-cmp, LuaSnip |
+| フォーマット | conform.nvim |
+| リント | nvim-lint |
+| シンタックス | nvim-treesitter |
+| Git | gitsigns |
+| AI | avante.nvim (Claude), Copilot, CopilotChat, claude-code.nvim |
+| 言語サポート | typescript-tools, go.nvim |
+| その他 | todo-comments, vim-illuminate, neoscroll, fidget, which-key |
+
+### セットアップ後
+
+1. nvim を起動するとプラグインが自動インストールされる
+2. `:Lazy sync` で最新版に更新
+3. API キーをシェル環境変数に追加:
+
+```bash
+export ANTHROPIC_API_KEY=sk-ant-...
+```
