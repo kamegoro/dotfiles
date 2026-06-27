@@ -18,6 +18,13 @@ return {
         dashboard = true,
         mason = true,
         indent_blankline = { enabled = true },
+        illuminate = { enabled = true, lsp = false },
+        lsp_trouble = true,
+        which_key = true,
+        nvim_surround = true,
+        fidget = true,
+        render_markdown = true,
+        avante = true,
       },
     },
     config = function(_, opts)

@@ -8,7 +8,8 @@ return {
         enabled = true,
         auto_trigger = true,
         keymap = {
-          accept = "<Tab>",
+          -- accept は cmp の <Tab> fallback から呼ぶため無効化
+          accept = false,
           accept_word = "<C-Right>",
           next = "<M-]>",
           prev = "<M-[>",

@@ -58,7 +58,14 @@ return {
         },
         lua_ls = {
           settings = {
-            Lua = { diagnostics = { globals = { "vim" } } },
+            Lua = {
+              diagnostics = { globals = { "vim" } },
+              workspace = {
+                library = { vim.env.VIMRUNTIME },
+                checkThirdParty = false,
+              },
+              telemetry = { enable = false },
+            },
           },
         },
         yamlls = {

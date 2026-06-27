@@ -33,14 +33,19 @@ return {
           -- select=false: 明示的に選択した項目のみ確定。未選択時はただの改行
           ["<CR>"] = cmp.mapping.confirm({ select = false }),
           ["<C-Space>"] = cmp.mapping.complete(),
-          -- Tab: スニペット内はフィールドジャンプ優先、それ以外は Copilot にフォールスルー
+          -- Tab: cmp選択 → LuaSnip jump → Copilot accept の優先順で処理
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
             elseif luasnip.locally_jumpable(1) then
               luasnip.jump(1)
             else
-              fallback()
+              local ok, cs = pcall(require, "copilot.suggestion")
+              if ok and cs.is_visible() then
+                cs.accept()
+              else
+                fallback()
+              end
             end
           end, { "i", "s" }),
           ["<S-Tab>"] = cmp.mapping(function(fallback)

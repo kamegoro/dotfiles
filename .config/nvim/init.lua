@@ -40,6 +40,16 @@ vim.keymap.set("n", "<leader>q", ":q<CR>")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+-- Diagnostics: virtual_text is disabled by default in Neovim 0.12+
+-- Use virtual_lines (current line only) for clean inline display
+vim.diagnostic.config({
+  virtual_lines = { current_line = true },
+  signs = true,
+  underline = true,
+  float = { border = "rounded" },
+  severity_sort = true,
+})
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
