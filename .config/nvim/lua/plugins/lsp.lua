@@ -1,10 +1,12 @@
 return {
   {
     "williamboman/mason.nvim",
+    event = "VeryLazy",
     opts = {},
   },
   {
     "williamboman/mason-lspconfig.nvim",
+    event = "VeryLazy",
     dependencies = { "williamboman/mason.nvim" },
     opts = {
       ensure_installed = {

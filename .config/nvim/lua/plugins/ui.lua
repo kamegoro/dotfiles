@@ -28,6 +28,7 @@ return {
   },
   {
     "akinsho/bufferline.nvim",
+    event = "BufReadPost",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       options = {
@@ -43,6 +44,7 @@ return {
   },
   {
     "lukas-reineke/indent-blankline.nvim",
+    event = "BufReadPost",
     main = "ibl",
     opts = {
       exclude = {
@@ -53,6 +55,7 @@ return {
   },
   {
     "j-hui/fidget.nvim",
+    event = "LspAttach",
     opts = {
       progress = {
         suppress_on_insert = true,
@@ -65,6 +68,7 @@ return {
   },
   {
     "karb94/neoscroll.nvim",
+    event = "BufReadPost",
     opts = {
       mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "zt", "zz", "zb" },
       hide_cursor = true,
