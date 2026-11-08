@@ -1,6 +1,7 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    pin = true, -- Neovim 0.12.3 compat patch applied to query_predicates.lua
     event = "BufReadPost",
     build = ":TSUpdate",
     main = "nvim-treesitter.configs",

@@ -23,25 +23,11 @@ typeset -U path
 
 path=(
   $HOME/.local/bin
-  $HOME/.bun/bin
-  $HOME/.cargo/bin
   $HOME/.pub-cache/bin
-  $(go env GOPATH 2>/dev/null)/bin
+  $HOME/go/bin
   ${KREW_ROOT:-$HOME/.krew}/bin
-  /opt/homebrew/opt/mysql-client/bin
-  /Applications/IntelliJ\ IDEA\ CE.app/Contents/MacOS
   $path
 )
-
-# Android SDK
-export ANDROID_HOME="$HOME/Library/Android/sdk"
-path=($ANDROID_HOME/emulator $ANDROID_HOME/platform-tools $path)
-
-# Dotnet (via mise)
-if DOTNET_ROOT=$(mise where dotnet 2>/dev/null); then
-  export DOTNET_ROOT
-  path=($DOTNET_ROOT $path)
-fi
 
 export PATH
 
@@ -51,28 +37,17 @@ export PATH
 # mise
 eval "$(mise activate zsh)"
 
-# Cargo
-[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
-
 # SDKMAN
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 
-# bun completions
-[[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
-
 # fzf
-[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+command -v fzf &>/dev/null && source <(fzf --zsh)
 
 # kubectl
 if command -v kubectl &>/dev/null; then
   source <(kubectl completion zsh)
 fi
-
-# -----------------------------------------------------------
-# Completions
-# -----------------------------------------------------------
-fpath=(~/.zsh/completion $fpath)
 
 # -----------------------------------------------------------
 # Aliases
