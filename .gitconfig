@@ -3,6 +3,7 @@
 	email = tentyo0620@icloud.com
 [core]
 	editor = vim
+	pager = delta
 [interactive]
 	diffFilter = delta --color-only
 [delta]
