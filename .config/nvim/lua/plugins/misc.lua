@@ -11,14 +11,6 @@ return {
     },
   },
   {
-    "stevearc/dressing.nvim",
-    event = "VeryLazy",
-    opts = {
-      input = { border = "rounded" },
-      select = { backend = { "telescope", "builtin" } },
-    },
-  },
-  {
     "NvChad/nvim-colorizer.lua",
     event = "BufReadPost",
     opts = {
