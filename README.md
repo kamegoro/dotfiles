@@ -75,8 +75,9 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/zsh-syntax
 
 1. nvim を起動するとプラグインが自動インストールされる
 2. `:Lazy sync` で最新版に更新
-3. API キーをシェル環境変数に追加:
+3. API キーを `~/.zshrc.local` に追加（`~/.zshrc` はこのリポジトリへのシンボリックリンクなので、キーを書くと公開リポジトリにコミットされてしまう）:
 
 ```bash
-export ANTHROPIC_API_KEY=sk-ant-...
+echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.zshrc.local
+chmod 600 ~/.zshrc.local
 ```

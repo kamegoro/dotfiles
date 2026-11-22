@@ -80,6 +80,11 @@ fpath=(~/.zsh/completion $fpath)
 [[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases
 
 # -----------------------------------------------------------
+# Machine-local settings and secrets (not tracked by this repo)
+# -----------------------------------------------------------
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+# -----------------------------------------------------------
 # Plugins & Theme
 # -----------------------------------------------------------
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
