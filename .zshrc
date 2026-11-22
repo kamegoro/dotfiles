@@ -35,12 +35,12 @@ export PATH
 # -----------------------------------------------------------
 # Tools
 # -----------------------------------------------------------
-# mise
-eval "$(mise activate zsh)"
-
-# SDKMAN
+# SDKMAN (Java / Maven)
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
+# mise: 他の PATH 変更より後に有効化して、mise 管理のツールを優先させる
+eval "$(mise activate zsh)"
 
 # fzf
 command -v fzf &>/dev/null && source <(fzf --zsh)
