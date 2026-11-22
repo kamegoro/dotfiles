@@ -19,6 +19,8 @@ cd ~/dotfiles
 │   │   ├── init.lua
 │   │   ├── lazy-lock.json
 │   │   └── lua/plugins/
+│   ├── ghostty/
+│   │   └── config          # Ghostty ターミナル設定
 │   ├── git/
 │   │   └── ignore          # global gitignore
 │   └── mise/
@@ -42,6 +44,8 @@ cd ~/dotfiles
 | [JetBrains Mono Nerd Font](https://www.nerdfonts.com/) | `brew install font-jetbrains-mono-nerd-font` |
 | [mise](https://mise.jdx.dev/) | `brew install mise` |
 | [git-delta](https://github.com/dandavison/delta) | `brew install git-delta` |
+| [tree-sitter CLI](https://github.com/tree-sitter/tree-sitter) | `brew install tree-sitter-cli`（nvim-treesitter がパーサーのビルドに使う） |
+| [Ghostty](https://ghostty.org/) | `brew install --cask ghostty` |
 
 ### zsh プラグイン
 
@@ -65,19 +69,24 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/zsh-syntax
 | 補完 | nvim-cmp, LuaSnip |
 | フォーマット | conform.nvim |
 | リント | nvim-lint |
-| シンタックス | nvim-treesitter |
+| シンタックス | nvim-treesitter (main), nvim-treesitter-textobjects |
 | Git | gitsigns |
-| AI | avante.nvim (Claude), Copilot, CopilotChat, claude-code.nvim |
+| AI | Copilot, CopilotChat, claude-code.nvim |
 | 言語サポート | typescript-tools, go.nvim |
 | その他 | todo-comments, vim-illuminate, neoscroll, fidget, which-key |
 
 ### セットアップ後
 
-1. nvim を起動するとプラグインが自動インストールされる
-2. `:Lazy sync` で最新版に更新
-3. API キーを `~/.zshrc.local` に追加（`~/.zshrc` はこのリポジトリへのシンボリックリンクなので、キーを書くと公開リポジトリにコミットされてしまう）:
+1. nvim を起動するとプラグインと treesitter パーサーが自動インストールされる
+2. `:Lazy sync` で最新版に更新（treesitter パーサーは `:TSUpdate`）
+3. `:checkhealth` で LSP・treesitter に ERROR が無いことを確認する
+
+### シークレット
+
+API キーなどマシン固有の値は `~/.zshrc.local` に書く（`.zshrc` から読み込まれる）。
+`~/.zshrc` はこのリポジトリへのシンボリックリンクなので、直接書くと公開リポジトリにコミットされてしまう。
 
 ```bash
-echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.zshrc.local
+echo 'export SOME_API_KEY=...' >> ~/.zshrc.local
 chmod 600 ~/.zshrc.local
 ```
