@@ -50,5 +50,5 @@ echo "       git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/z
 echo "       git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/zsh-syntax-highlighting"
 echo "  2. Open nvim to auto-install plugins:"
 echo "       nvim"
-echo "  3. Add API keys to ~/.zshrc (or ~/.zshenv):"
+echo "  3. Add API keys to ~/.zshrc.local (NOT ~/.zshrc: it is a symlink into this public repo):"
 echo "       export ANTHROPIC_API_KEY=sk-ant-..."

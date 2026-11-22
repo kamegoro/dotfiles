@@ -3,3 +3,7 @@
 
 # lazy.nvim キャッシュ（lock ファイルは管理対象）
 .config/nvim/.luarc.json
+
+# マシン固有の設定・シークレット（誤ってリポジトリに置かれた場合の保険）
+.zshrc.local
+.env
