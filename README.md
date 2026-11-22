@@ -19,8 +19,6 @@ cd ~/dotfiles
 │   │   ├── init.lua
 │   │   ├── lazy-lock.json
 │   │   └── lua/plugins/
-│   ├── ghostty/
-│   │   └── config          # Ghostty ターミナル設定
 │   ├── git/
 │   │   └── ignore          # global gitignore
 │   └── mise/
@@ -45,7 +43,6 @@ cd ~/dotfiles
 | [mise](https://mise.jdx.dev/) | `brew install mise` |
 | [git-delta](https://github.com/dandavison/delta) | `brew install git-delta` |
 | [tree-sitter CLI](https://github.com/tree-sitter/tree-sitter) | `brew install tree-sitter-cli`（nvim-treesitter がパーサーのビルドに使う） |
-| [Ghostty](https://ghostty.org/) | `brew install --cask ghostty` |
 
 ### zsh プラグイン
 
