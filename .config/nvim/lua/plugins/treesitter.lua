@@ -4,7 +4,6 @@ local parsers = {
   "lua", "typescript", "tsx", "javascript",
   "go", "gomod", "gosum",
   "python",
-  "rust",
   "json", "yaml", "toml",
   "html", "css",
   "markdown", "markdown_inline",
