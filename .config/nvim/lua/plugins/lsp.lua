@@ -1,13 +1,14 @@
 return {
   {
-    "williamboman/mason.nvim",
-    event = "VeryLazy",
+    -- Loaded as a dependency of nvim-lspconfig so that mason's bin dir is on PATH
+    -- before any server is enabled (otherwise servers are "not executable").
+    "mason-org/mason.nvim",
+    cmd = "Mason",
     opts = {},
   },
   {
-    "williamboman/mason-lspconfig.nvim",
-    event = "VeryLazy",
-    dependencies = { "williamboman/mason.nvim" },
+    "mason-org/mason-lspconfig.nvim",
+    dependencies = { "mason-org/mason.nvim" },
     opts = {
       ensure_installed = {
         "eslint",
@@ -24,18 +25,21 @@ return {
         "terraformls",
         "marksman",
       },
-      automatic_installation = true,
-      -- LSP setup は nvim-lspconfig 側で vim.lsp.config/enable を使って手動管理するため
-      -- mason-lspconfig のデフォルトハンドラー（全インストール済みサーバーを自動 enable）を無効化
-      handlers = {
-        function(_) end,
-      },
+      -- LSP は nvim-lspconfig 側で vim.lsp.config/enable を使って手動管理する。
+      -- mason-lspconfig v2 はデフォルトでインストール済みの全サーバーを enable するため無効化
+      -- （有効のままだと ts_ls が typescript-tools と二重に起動する）
+      automatic_enable = false,
     },
   },
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
-    dependencies = { "b0o/schemastore.nvim", "hrsh7th/cmp-nvim-lsp" },
+    dependencies = {
+      "mason-org/mason.nvim",
+      "mason-org/mason-lspconfig.nvim",
+      "b0o/schemastore.nvim",
+      "hrsh7th/cmp-nvim-lsp",
+    },
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -106,8 +110,8 @@ return {
       { "K", vim.lsp.buf.hover, desc = "Hover" },
       { "<leader>rn", vim.lsp.buf.rename, desc = "Rename" },
       { "<leader>ca", vim.lsp.buf.code_action, desc = "Code action" },
-      { "]d", vim.diagnostic.goto_next, desc = "Next diagnostic" },
-      { "[d", vim.diagnostic.goto_prev, desc = "Prev diagnostic" },
+      { "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, desc = "Next diagnostic" },
+      { "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, desc = "Prev diagnostic" },
       { "<leader>d", vim.diagnostic.open_float, desc = "Diagnostic float" },
     },
   },

@@ -24,7 +24,6 @@ return {
         nvim_surround = true,
         fidget = true,
         render_markdown = true,
-        avante = true,
       },
     },
     config = function(_, opts)
