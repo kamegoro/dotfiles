@@ -11,6 +11,7 @@ setopt HIST_IGNORE_SPACE
 setopt SHARE_HISTORY
 setopt AUTO_CD
 setopt NO_BEEP
+setopt EXTENDED_HISTORY  # 実行日時も記録する（不要なツールの棚卸しに使える）
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
